@@ -23,6 +23,10 @@ export default async function (config) {
   const UserModel = setupUserModel(config)
   const CarModel = setupCarModel(config)
 
+  // Relations
+  UserModel.hasMany(CarModel)
+  CarModel.belongsTo(UserModel)
+
   try {
     await sequelize.authenticate()
     console.log('--- SQLITE Connected ---')
