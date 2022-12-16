@@ -1,5 +1,7 @@
 // Lib and models
 import setupDatabase from './lib/db'
+import setupUser from './lib/user'
+import setupUserModel from './models/user'
 import defaults from 'defaults'
 
 export default async function (config) {
@@ -16,15 +18,22 @@ export default async function (config) {
   })
 
   const sequelize = setupDatabase(config)
+  const UserModel = setupUserModel(config)
 
   try {
     await sequelize.authenticate()
-    console.log('Connected')
+    console.log('--- SQLITE Connected ---')
   } catch(err) {
     return new Error(JSON.stringify(err))
   }
 
+  const User = setupUser(UserModel)
+
   if (config.setup) {
     return await sequelize.sync({ force: true })
+  }
+
+  return {
+    User
   }
 }
