@@ -1,8 +1,9 @@
 {
   "name": "car-shop-db",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Database for Car shop web site.",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "tsc && node build/src/",
     "clean": "rm -rf build/** && rm -d build/",
